@@ -30,8 +30,8 @@ interface UserResponse {
   createdAt: string
 }
 
-const API_BASE_URL = 'http://localhost:8080/api/v1'
-const LOGIN_URL = 'http://localhost:8080/api/v1/login'
+const API_HOST = import.meta.env.VITE_API_BASE_URL || 'https://millisec.courses'
+const API_BASE_URL = `${API_HOST}/api/v1`
 const TOKEN_STORAGE_KEY = 'authToken'
 const TOKEN_META_KEY = 'tokenMeta'
 const ROLE_STORAGE_KEY = 'authRole'
@@ -209,7 +209,7 @@ function renderLoginPage() {
     }
 
     try {
-      const token = await fetch(LOGIN_URL, {
+      const token = await fetch(`${API_BASE_URL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
